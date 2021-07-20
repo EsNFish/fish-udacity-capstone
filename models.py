@@ -1,9 +1,8 @@
-
+from .shared_db import db
 
 '''
 Game
 '''
-from .shared_db import db
 
 
 class Game(db.Model):
@@ -36,9 +35,12 @@ class Game(db.Model):
             'genre': self.genre,
             'console': self.console}
 
+
 '''
 Console
 '''
+
+
 class Console(db.Model):
     __tablename__ = 'consoles'
 
