@@ -18,6 +18,14 @@ def expected_404_builder(message):
     }
 
 
+def expected_422_builder(message):
+    return {
+        "success": False,
+        "error": 422,
+        "message": message
+    }
+
+
 class GameStore(unittest.TestCase):
 
     @staticmethod
@@ -82,6 +90,41 @@ class GameStore(unittest.TestCase):
         actual_response = json.loads(res.data)
 
         self.assertEqual(expected_404_builder('No games found'), actual_response)
+
+    def test_add_game__adds_new_game_to_database(self):
+
+        request_body = {
+            'name': "WarCraft 3",
+            'genre': 'RTS',
+            'console': 'PC'
+        }
+
+        post_res = self.client().post('/games', json=request_body)
+
+        self.assertEqual(post_res.status_code, 204)
+
+        res = self.client().get('/games')
+        data = json.loads(res.data)
+        games = data['games']
+        self.assertEqual(games[0], {'console': request_body['console'],
+                                    'genre': request_body['genre'],
+                                    'id': 1,
+                                    'name': request_body['name']})
+
+    def test_add_game__add_a_game_that_without_a_name__return_a_422(self):
+
+        request_body = {
+            'genre': 'RTS',
+            'console': 'PC'
+        }
+
+        post_res = self.client().post('/games', json=request_body)
+
+        print(post_res)
+        actual_response = json.loads(post_res.data)
+
+        self.assertEqual(expected_422_builder('Game must have a name'), actual_response)
+
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
