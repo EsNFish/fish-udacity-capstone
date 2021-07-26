@@ -190,6 +190,11 @@ class GameStore(unittest.TestCase):
         game = data['game']
         self.assertEqual(game, {'console': 'SNES', 'genre': 'RPG', 'id': 1, 'name': 'Final Fantasy'})
 
+    def test_get_game__updating_game_not_in_database__returns_404_error(self):
+        res = self.client().put('/games/400', json={'name': 'No game here'})
+        actual_response = json.loads(res.data)
+        self.assertEqual(expected_404_builder('Can not update, game does not exist'), actual_response)
+
     def test_get_game__no_request_body__returns_422_error(self):
         res = self.client().put('/games/1')
         actual_response = json.loads(res.data)

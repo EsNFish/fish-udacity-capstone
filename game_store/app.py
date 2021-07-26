@@ -62,6 +62,9 @@ def create_app(test_config=None):
                 abort(422, {'message': 'Must include a value to update'})
 
             game = Game.query.filter_by(id=game_id).first()
+
+            if game is None:
+                abort(404, {'message': 'Can not update, game does not exist'})
             if 'name' in update_data:
                 game.name = update_data['name']
             if 'genre' in update_data:
