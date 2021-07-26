@@ -43,15 +43,40 @@ def create_app(test_config=None):
                 'success': True
             }), 204
 
-    @app.route('/games/<game_id>', methods=['GET'])
+    @app.route('/games/<game_id>', methods=['GET', 'PUT'])
     def handle_game(game_id):
-        game = Game.query.filter_by(id=game_id).first()
-        if game is None:
-            abort(404, {'message': 'Game not found'})
-        return jsonify({
-            'success': True,
-            'game': game.format()
-        }), 200
+        if request.method == 'GET':
+            game = Game.query.filter_by(id=game_id).first()
+            if game is None:
+                abort(404, {'message': 'Game not found'})
+            return jsonify({
+                'success': True,
+                'game': game.format()
+            }), 200
+        if request.method == 'PUT':
+            update_data = request.json
+
+            if update_data is None:
+                abort(422, {'message': 'Request missing body'})
+            if 'name' not in update_data and 'genre' not in update_data and 'console' not in update_data:
+                abort(422, {'message': 'Must include a value to update'})
+
+            game = Game.query.filter_by(id=game_id).first()
+            if 'name' in update_data:
+                game.name = update_data['name']
+            if 'genre' in update_data:
+                game.genre = update_data['genre']
+            if 'console' in update_data:
+                game.console = update_data['console']
+
+            game.update()
+
+            return jsonify({
+                'success': True,
+            }), 200
+
+
+
 
 
     @app.errorhandler(404)

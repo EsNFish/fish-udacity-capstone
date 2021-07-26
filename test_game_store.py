@@ -142,6 +142,64 @@ class GameStore(unittest.TestCase):
 
         self.assertEqual(expected_422_builder('Game must have a name'), actual_response)
 
+    def test_get_game__new_name_is_passed_in__returns_game_with_matching_id(self):
+        with self.app.app_context():
+            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+
+        res = self.client().put('/games/1', json={'name': 'Final Fantasy 2'})
+
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+
+        res = self.client().get('/games/1')
+
+        data = json.loads(res.data)
+        game = data['game']
+        self.assertEqual(game, {'console': 'NES', 'genre': 'RPG', 'id': 1, 'name': 'Final Fantasy 2'})
+
+    def test_get_game__new_genre_is_passed_in__returns_game_with_matching_id(self):
+        with self.app.app_context():
+            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+
+        res = self.client().put('/games/1', json={'genre': 'Rhythm'})
+
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+
+        res = self.client().get('/games/1')
+
+        data = json.loads(res.data)
+        game = data['game']
+        self.assertEqual(game, {'console': 'NES', 'genre': 'Rhythm', 'id': 1, 'name': 'Final Fantasy'})
+
+    def test_get_game__new_console_is_passed_in__returns_game_with_matching_id(self):
+        with self.app.app_context():
+            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+
+        res = self.client().put('/games/1', json={'console': 'SNES'})
+
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+
+        res = self.client().get('/games/1')
+
+        data = json.loads(res.data)
+        game = data['game']
+        self.assertEqual(game, {'console': 'SNES', 'genre': 'RPG', 'id': 1, 'name': 'Final Fantasy'})
+
+    def test_get_game__no_request_body__returns_422_error(self):
+        res = self.client().put('/games/1')
+        actual_response = json.loads(res.data)
+        self.assertEqual(expected_422_builder('Request missing body'), actual_response)
+
+    def test_get_game__no_update_data_passed_in__returns_422_error(self):
+        res = self.client().put('/games/1', json={})
+        actual_response = json.loads(res.data)
+        self.assertEqual(expected_422_builder('Must include a value to update'), actual_response)
+
 
 # Make the tests conveniently executable
 if __name__ == "__main__":
