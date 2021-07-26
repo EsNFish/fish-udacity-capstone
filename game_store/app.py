@@ -43,6 +43,17 @@ def create_app(test_config=None):
                 'success': True
             }), 204
 
+    @app.route('/games/<game_id>', methods=['GET'])
+    def handle_game(game_id):
+        game = Game.query.filter_by(id=game_id).first()
+        if game is None:
+            abort(404, {'message': 'Game not found'})
+        return jsonify({
+            'success': True,
+            'game': game.format()
+        }), 200
+
+
     @app.errorhandler(404)
     def unprocessable_entity(error):
         return jsonify({

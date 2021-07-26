@@ -71,7 +71,6 @@ class GameStore(unittest.TestCase):
 
     def test_get_games__returns_games_from_database(self):
         with self.app.app_context():
-            self.add_game()
             self.add_game(Game('Final Fantasy', "RPG", "NES"))
 
         res = self.client().get('/games')
@@ -80,9 +79,8 @@ class GameStore(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
         games = data['games']
-        self.assertEqual(len(games), 2)
-        self.assertEqual(games[0], {'console': 'test', 'genre': 'test', 'id': 1, 'name': 'test'})
-        self.assertEqual(games[1], {'console': 'NES', 'genre': 'RPG', 'id': 2, 'name': 'Final Fantasy'})
+        self.assertEqual(len(games), 1)
+        self.assertEqual(games[0], {'console': 'NES', 'genre': 'RPG', 'id': 1, 'name': 'Final Fantasy'})
 
     def test_get_games__no_games_in_database__returns_404_error(self):
         res = self.client().get('/games')
@@ -90,6 +88,26 @@ class GameStore(unittest.TestCase):
         actual_response = json.loads(res.data)
 
         self.assertEqual(expected_404_builder('No games found'), actual_response)
+
+    def test_get_game__returns_game_with_matching_id(self):
+        with self.app.app_context():
+            self.add_game()
+            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+
+        res = self.client().get('/games/2')
+
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        game = data['game']
+        self.assertEqual(game, {'console': 'NES', 'genre': 'RPG', 'id': 2, 'name': 'Final Fantasy'})
+
+    def test_get_games__game_not_in_database__returns_404_error(self):
+        res = self.client().get('/games/100')
+
+        actual_response = json.loads(res.data)
+
+        self.assertEqual(expected_404_builder('Game not found'), actual_response)
 
     def test_add_game__adds_new_game_to_database(self):
 
@@ -120,7 +138,6 @@ class GameStore(unittest.TestCase):
 
         post_res = self.client().post('/games', json=request_body)
 
-        print(post_res)
         actual_response = json.loads(post_res.data)
 
         self.assertEqual(expected_422_builder('Game must have a name'), actual_response)
