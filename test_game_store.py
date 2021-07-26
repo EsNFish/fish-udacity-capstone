@@ -91,7 +91,7 @@ class GameStore(unittest.TestCase):
 
     def test_get_game__returns_game_with_matching_id(self):
         with self.app.app_context():
-            self.add_game()
+            self.add_game(Game('wat', 'idk', 'idc'))
             self.add_game(Game('Final Fantasy', "RPG", "NES"))
 
         res = self.client().get('/games/2')
@@ -204,6 +204,33 @@ class GameStore(unittest.TestCase):
         res = self.client().put('/games/1', json={})
         actual_response = json.loads(res.data)
         self.assertEqual(expected_422_builder('Must include a value to update'), actual_response)
+
+    def test_delete_game__deletes_game_from_database(self):
+        with self.app.app_context():
+            self.add_game()
+            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+
+        res = self.client().get('/games')
+        data = json.loads(res.data)
+        self.assertEqual(2, len(data['games']))
+
+        res = self.client().delete('/games/2')
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+
+        res = self.client().get('/games')
+        data = json.loads(res.data)
+        self.assertEqual(1, len(data['games']))
+
+        res = self.client().get('/games/2')
+        actual_response = json.loads(res.data)
+        self.assertEqual(expected_404_builder('Game not found'), actual_response)
+
+    def test_delete_game__game_not_in_database__deletes_game_from_database(self):
+        res = self.client().delete('/games/400000')
+        actual_response = json.loads(res.data)
+        self.assertEqual(expected_404_builder('Can not delete, game does not exist'), actual_response)
 
 
 # Make the tests conveniently executable

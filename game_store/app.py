@@ -43,7 +43,7 @@ def create_app(test_config=None):
                 'success': True
             }), 204
 
-    @app.route('/games/<game_id>', methods=['GET', 'PUT'])
+    @app.route('/games/<game_id>', methods=['GET', 'PUT', 'DELETE'])
     def handle_game(game_id):
         if request.method == 'GET':
             game = Game.query.filter_by(id=game_id).first()
@@ -77,6 +77,19 @@ def create_app(test_config=None):
             return jsonify({
                 'success': True,
             }), 200
+
+        if request.method == 'DELETE':
+            game = Game.query.filter_by(id=game_id).first()
+
+            if game is None:
+                abort(404, {'message': 'Can not delete, game does not exist'})
+
+            game.delete()
+
+            return jsonify({
+                'success': True,
+            }), 200
+
 
 
 
