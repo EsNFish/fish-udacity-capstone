@@ -4,8 +4,8 @@ import unittest
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text as sa_text
 
-from game_store.app import create_app
-from game_store.models import Game, setup_db
+from app import create_app
+from models import Game, setup_db
 
 test_game = Game('test', 'test', 'test')
 
@@ -27,13 +27,6 @@ def expected_422_builder(message):
 
 
 class GameStore(unittest.TestCase):
-
-    @staticmethod
-    def add_game(game=None):
-        if game is None:
-            test_game.insert()
-        else:
-            game.insert()
 
     @staticmethod
     def remove_default_game():
@@ -71,7 +64,7 @@ class GameStore(unittest.TestCase):
 
     def test_get_games__returns_games_from_database(self):
         with self.app.app_context():
-            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+            Game('Final Fantasy', "RPG", "NES").insert()
 
         res = self.client().get('/games')
 
@@ -91,8 +84,8 @@ class GameStore(unittest.TestCase):
 
     def test_get_game__returns_game_with_matching_id(self):
         with self.app.app_context():
-            self.add_game(Game('wat', 'idk', 'idc'))
-            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+            Game('wat', 'idk', 'idc').insert()
+            Game('Final Fantasy', "RPG", "NES").insert()
 
         res = self.client().get('/games/2')
 
@@ -144,7 +137,7 @@ class GameStore(unittest.TestCase):
 
     def test_get_game__new_name_is_passed_in__returns_game_with_matching_id(self):
         with self.app.app_context():
-            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+            Game('Final Fantasy', "RPG", "NES").insert()
 
         res = self.client().put('/games/1', json={'name': 'Final Fantasy 2'})
 
@@ -160,7 +153,7 @@ class GameStore(unittest.TestCase):
 
     def test_get_game__new_genre_is_passed_in__returns_game_with_matching_id(self):
         with self.app.app_context():
-            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+           Game('Final Fantasy', "RPG", "NES").insert()
 
         res = self.client().put('/games/1', json={'genre': 'Rhythm'})
 
@@ -176,7 +169,7 @@ class GameStore(unittest.TestCase):
 
     def test_get_game__new_console_is_passed_in__returns_game_with_matching_id(self):
         with self.app.app_context():
-            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+            Game('Final Fantasy', "RPG", "NES").insert()
 
         res = self.client().put('/games/1', json={'console': 'SNES'})
 
@@ -207,8 +200,8 @@ class GameStore(unittest.TestCase):
 
     def test_delete_game__deletes_game_from_database(self):
         with self.app.app_context():
-            self.add_game()
-            self.add_game(Game('Final Fantasy', "RPG", "NES"))
+            test_game.insert()
+            Game('Final Fantasy', "RPG", "NES").insert()
 
         res = self.client().get('/games')
         data = json.loads(res.data)

@@ -1,4 +1,4 @@
-from .shared_db import db
+from shared_db import db
 
 default_name = "game_store"
 default_path = "postgresql://test:test@{}/{}".format('localhost:5432', default_name)

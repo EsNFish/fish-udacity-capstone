@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, abort, request
 
-from .models import setup_db, Game
+from models import setup_db, Game
 from flask_migrate import Migrate
 from flask_cors import CORS
 
@@ -114,5 +114,5 @@ def create_app(test_config=None):
     return app
 
 
-# if __name__ == '__main__':
-#     create_app().run()
+if __name__ == '__main__':
+    create_app().run()
