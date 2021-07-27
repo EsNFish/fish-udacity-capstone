@@ -47,3 +47,11 @@ class Game(db.Model):
             'name': self.name,
             'genre': self.genre,
             'console': self.console}
+
+class Product(db.Model):
+    __tablename__ = 'products'
+
+    id = db.Column(db.Integer, primary_key=True)
+    price = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
+    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
