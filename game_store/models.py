@@ -48,6 +48,12 @@ class Game(db.Model):
             'genre': self.genre,
             'console': self.console}
 
+
+'''
+Product
+'''
+
+
 class Product(db.Model):
     __tablename__ = 'products'
 
@@ -55,3 +61,26 @@ class Product(db.Model):
     price = db.Column(db.Integer)
     quantity = db.Column(db.Integer)
     game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
+
+    def __init__(self, game_id, price="", quantity=""):
+        self.price = price
+        self.quantity = quantity
+        self.game_id = game_id
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
+        return {
+            'id': self.id,
+            'price': self.price,
+            'quantity': self.quantity,
+            'game_id': self.game_id}

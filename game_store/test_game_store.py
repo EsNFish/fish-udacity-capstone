@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text as sa_text
 
 from app import create_app
-from models import Game, setup_db
+from models import Game, setup_db, Product
 
 test_game = Game('test', 'test', 'test')
 
@@ -54,7 +54,7 @@ class GameStore(unittest.TestCase):
                     sa_text('''TRUNCATE TABLE games RESTART IDENTITY CASCADE ''').execution_options(
                         autocommit=True))
                 self.db.engine.execute(
-                    sa_text('''TRUNCATE TABLE consoles RESTART IDENTITY CASCADE ''').execution_options(
+                    sa_text('''TRUNCATE TABLE products RESTART IDENTITY CASCADE ''').execution_options(
                         autocommit=True))
             except:
                 self.db.session.rollback()
@@ -62,6 +62,9 @@ class GameStore(unittest.TestCase):
             self.db.session.close()
         pass
 
+    '''
+    Games Tests
+    '''
     def test_get_games__returns_games_from_database(self):
         with self.app.app_context():
             Game('Final Fantasy', "RPG", "NES").insert()
@@ -224,6 +227,22 @@ class GameStore(unittest.TestCase):
         res = self.client().delete('/games/400000')
         actual_response = json.loads(res.data)
         self.assertEqual(expected_404_builder('Can not delete, game does not exist'), actual_response)
+
+    '''
+    Products Tests
+    '''
+    def test_get_products__return_products(self):
+        with self.app.app_context():
+            Game('Final Fantasy', 'RPG', 'NES').insert()
+            Product(1, 1, 1).insert()
+
+        res = self.client().get('/products')
+        data = json.loads(res.data)
+        self.assertEqual(res.status_code, 200)
+        self.assertTrue(data['success'])
+        products = data['products']
+        self.assertEqual(len(products), 1)
+        self.assertEqual(products[0], {'game_id': 1, 'price': 1, 'id': 1, 'quantity': 1})
 
 
 # Make the tests conveniently executable

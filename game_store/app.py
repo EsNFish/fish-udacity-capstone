@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, abort, request
 
-from models import setup_db, Game
+from models import setup_db, Game, Product
 from flask_migrate import Migrate
 from flask_cors import CORS
 
@@ -90,6 +90,16 @@ def create_app(test_config=None):
                 'success': True,
             }), 200
 
+    @app.route('/products', methods=['GET'])
+    def process_products():
+        if request.method == 'GET':
+            products = Product.query.all()
+
+        formatted_products = [product.format() for product in products]
+        return jsonify({
+            'success': True,
+            'products': formatted_products
+        }), 200
 
 
 
