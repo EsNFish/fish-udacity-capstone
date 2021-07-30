@@ -1,6 +1,6 @@
 from shared_db import db
 
-default_name = "game_store"
+default_name = "pet_checkin"
 default_path = "postgresql://test:test@{}/{}".format('localhost:5432', default_name)
 
 
@@ -13,22 +13,20 @@ def setup_db(app, database_path=default_path):
     return db
 
 '''
-Game
+Owner
 '''
 
 
-class Game(db.Model):
-    __tablename__ = 'games'
+class Owner(db.Model):
+    __tablename__ = 'owners'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    genre = db.Column(db.String)
-    console = db.Column(db.String)
+    name = db.Column(db.String, nullable=False)
+    phone = db.Column(db.String, nullable=False)
 
-    def __init__(self, name, genre="", console=""):
+    def __init__(self, name, phone):
         self.name = name
-        self.genre = genre
-        self.console = console
+        self.phone = phone
 
     def insert(self):
         db.session.add(self)
@@ -45,27 +43,26 @@ class Game(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'genre': self.genre,
-            'console': self.console}
+            'phone': self.phone}
 
 
 '''
-Product
+Pet
 '''
 
 
-class Product(db.Model):
-    __tablename__ = 'products'
+class Pet(db.Model):
+    __tablename__ = 'pets'
 
     id = db.Column(db.Integer, primary_key=True)
-    price = db.Column(db.Integer)
-    quantity = db.Column(db.Integer)
-    game_id = db.Column(db.Integer, db.ForeignKey('games.id'), nullable=False)
+    name = db.Column(db.String)
+    species = db.Column(db.String)
+    breed = db.Column(db.String)
 
-    def __init__(self, game_id, price="", quantity=""):
-        self.price = price
-        self.quantity = quantity
-        self.game_id = game_id
+    def __init__(self, name, species, breed):
+        self.name = name
+        self.species = species
+        self.breed = breed
 
     def insert(self):
         db.session.add(self)
@@ -81,6 +78,6 @@ class Product(db.Model):
     def format(self):
         return {
             'id': self.id,
-            'price': self.price,
-            'quantity': self.quantity,
-            'game_id': self.game_id}
+            'name': self.name,
+            'species': self.species,
+            'breed': self.breed}
