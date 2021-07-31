@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, abort, request
 
-from models import setup_db, Owner
+from models import setup_db, Owner, Pet
 from flask_migrate import Migrate
 from flask_cors import CORS
 
@@ -85,6 +85,80 @@ def create_app(test_config=None):
                 abort(404, {'message': 'Can not delete, owner does not exist'})
 
             owner.delete()
+
+            return jsonify({
+                'success': True,
+            }), 200
+
+    @app.route('/pets', methods=['GET', 'POST'])
+    def get_pets():
+
+        if request.method == 'GET':
+            pets = Pet.query.all()
+
+            if len(pets) == 0:
+                abort(404, {'message': 'No pets found'})
+            formatted_pets = [pet.format() for pet in pets]
+            return jsonify({
+                'success': True,
+                'pets': formatted_pets
+            }), 200
+
+        if request.method == 'POST':
+            pet_data = request.json
+
+            if 'name' not in pet_data:
+                abort(422, {'message': 'Pet must have a name'})
+            if 'species' not in pet_data:
+                abort(422, {'message': 'Pet must have a species'})
+            new_pet = Pet(pet_data['name'], pet_data['species'], pet_data['breed'])
+            new_pet.insert()
+            return jsonify({
+                'success': True
+            }), 204
+
+    @app.route('/pets/<pet_id>', methods=['GET', 'PUT', 'DELETE'])
+    def handle_pet(pet_id):
+        if request.method == 'GET':
+            pet = Pet.query.filter_by(id=pet_id).first()
+            if pet is None:
+                abort(404, {'message': 'Pet not found'})
+            return jsonify({
+                'success': True,
+                'pet': pet.format()
+            }), 200
+        if request.method == 'PUT':
+            update_data = request.json
+
+            if update_data is None:
+                abort(422, {'message': 'Request missing body'})
+            if 'name' not in update_data and 'species' not in update_data and 'breed' not in update_data:
+                abort(422, {'message': 'Must include a value to update'})
+
+            pet = Pet.query.filter_by(id=pet_id).first()
+
+            if pet is None:
+                abort(404, {'message': 'Can not update, pet does not exist'})
+            if 'name' in update_data:
+                pet.name = update_data['name']
+            if 'species' in update_data:
+                pet.species = update_data['species']
+            if 'breed' in update_data:
+                pet.breed = update_data['breed']
+
+            pet.update()
+
+            return jsonify({
+                'success': True,
+            }), 200
+
+        if request.method == 'DELETE':
+            pet = Pet.query.filter_by(id=pet_id).first()
+
+            if pet is None:
+                abort(404, {'message': 'Can not delete, pet does not exist'})
+
+            pet.delete()
 
             return jsonify({
                 'success': True,

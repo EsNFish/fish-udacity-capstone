@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import text as sa_text
 
 from app import create_app
-from models import Pet, setup_db, Owner
+from models import setup_db, Owner
 
 
 def expected_404_builder(message):
@@ -24,7 +24,7 @@ def expected_422_builder(message):
     }
 
 
-class PetCheckin(unittest.TestCase):
+class OwnerEndpoints(unittest.TestCase):
 
     def setUp(self, test_config=None):
         self.app = create_app()

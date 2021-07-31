@@ -55,11 +55,11 @@ class Pet(db.Model):
     __tablename__ = 'pets'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String)
-    species = db.Column(db.String)
+    name = db.Column(db.String, nullable=False)
+    species = db.Column(db.String, nullable=False)
     breed = db.Column(db.String)
 
-    def __init__(self, name, species, breed):
+    def __init__(self, name, species, breed=""):
         self.name = name
         self.species = species
         self.breed = breed
