@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, abort, request
 
-from models import setup_db, Owner, Pet
+from models import setup_db, Owner, Pet, Appointment
 from flask_migrate import Migrate
 from flask_cors import CORS
 
@@ -163,6 +163,86 @@ def create_app(test_config=None):
             return jsonify({
                 'success': True,
             }), 200
+
+    @app.route('/appointments', methods=['GET', 'POST'])
+    def get_appointments():
+
+        if request.method == 'GET':
+            appointments = Appointment.query.all()
+
+            if len(appointments) == 0:
+                abort(404, {'message': 'No appointments found'})
+            formatted_appointments = [appointment.format() for appointment in appointments]
+            return jsonify({
+                'success': True,
+                'appointments': formatted_appointments
+            }), 200
+
+        if request.method == 'POST':
+            appointment_data = request.json
+
+            if 'date' not in appointment_data:
+                abort(422, {'message': 'Appointment must have a date'})
+            if 'time' not in appointment_data:
+                abort(422, {'message': 'Appointment must have a time'})
+            if 'pet_id' not in appointment_data:
+                abort(422, {'message': 'Appointment must have a pet'})
+            if 'owner_id' not in appointment_data:
+                abort(422, {'message': 'Appointment must have an owner'})
+
+            new_appointment = Appointment(appointment_data['date'], appointment_data['time'], appointment_data['pet_id'], appointment_data['owner_id'])
+
+            new_appointment.insert()
+
+            return jsonify({
+                'success': True
+            }), 204
+
+    @app.route('/appointments/<appointment_id>', methods=['GET', 'PUT', 'DELETE'])
+    def handle_appointment(appointment_id):
+        if request.method == 'GET':
+            appointment = Appointment.query.filter_by(id=appointment_id).first()
+            if appointment is None:
+                abort(404, {'message': 'Appointment not found'})
+            return jsonify({
+                'success': True,
+                'appointment': appointment.format()
+            }), 200
+        if request.method == 'PUT':
+            update_data = request.json
+
+            if update_data is None:
+                abort(422, {'message': 'Request missing body'})
+            if 'time' not in update_data and 'date' not in update_data:
+                abort(422, {'message': 'Must include a value to update'})
+
+            appointment = Appointment.query.filter_by(id=appointment_id).first()
+
+            if appointment is None:
+                abort(404, {'message': 'Can not update, appointment does not exist'})
+            if 'time' in update_data:
+                appointment.time = update_data['time']
+            if 'date' in update_data:
+                appointment.date = update_data['date']
+
+            appointment.update()
+
+            return jsonify({
+                'success': True,
+            }), 200
+
+        if request.method == 'DELETE':
+            appointment = Appointment.query.filter_by(id=appointment_id).first()
+
+            if appointment is None:
+                abort(404, {'message': 'Can not delete, appointment does not exist'})
+
+            appointment.delete()
+
+            return jsonify({
+                'success': True,
+            }), 200
+
 
     @app.errorhandler(404)
     def unprocessable_entity(error):
