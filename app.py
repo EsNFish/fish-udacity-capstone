@@ -3,6 +3,7 @@ from flask import Flask, jsonify, abort, request
 from models import setup_db, Owner, Pet, Appointment
 from flask_migrate import Migrate
 from flask_cors import CORS
+from auth import requires_auth
 
 
 def create_app(test_config=None):
@@ -19,7 +20,8 @@ def create_app(test_config=None):
         return response
 
     @app.route('/owners', methods=['GET', 'POST'])
-    def get_owners():
+    @requires_auth(['get-owners', 'post-owners'])
+    def get_owners(auth_token):
 
         if request.method == 'GET':
             owners = Owner.query.all()
@@ -46,7 +48,8 @@ def create_app(test_config=None):
             }), 204
 
     @app.route('/owners/<owner_id>', methods=['GET', 'PUT', 'DELETE'])
-    def handle_owner(owner_id):
+    @requires_auth(['get-owners', 'put-owners', 'delete-owners'])
+    def handle_owner(auth_token, owner_id):
         if request.method == 'GET':
             owner = Owner.query.filter_by(id=owner_id).first()
             if owner is None:
@@ -79,6 +82,12 @@ def create_app(test_config=None):
             }), 200
 
         if request.method == 'DELETE':
+            '''
+            adding this to handle one edge case
+            '''
+            if 'delete-owners' not in auth_token['permissions']:
+                abort(403, {'message': "Missing delete permission"})
+
             owner = Owner.query.filter_by(id=owner_id).first()
 
             if owner is None:
@@ -91,7 +100,8 @@ def create_app(test_config=None):
             }), 200
 
     @app.route('/pets', methods=['GET', 'POST'])
-    def get_pets():
+    @requires_auth(['get-pets', 'post-pets'])
+    def get_pets(auth_token):
 
         if request.method == 'GET':
             pets = Pet.query.all()
@@ -118,7 +128,8 @@ def create_app(test_config=None):
             }), 204
 
     @app.route('/pets/<pet_id>', methods=['GET', 'PUT', 'DELETE'])
-    def handle_pet(pet_id):
+    @requires_auth(['get-pets', 'put-pets', 'delete-pets'])
+    def handle_pet(auth_token, pet_id):
         if request.method == 'GET':
             pet = Pet.query.filter_by(id=pet_id).first()
             if pet is None:
@@ -153,6 +164,13 @@ def create_app(test_config=None):
             }), 200
 
         if request.method == 'DELETE':
+
+            '''
+                adding this to handle one edge case
+            '''
+            if 'delete-owners' not in auth_token['permissions']:
+                abort(403, {'message': "Missing delete permission"})
+
             pet = Pet.query.filter_by(id=pet_id).first()
 
             if pet is None:
@@ -165,7 +183,8 @@ def create_app(test_config=None):
             }), 200
 
     @app.route('/appointments', methods=['GET', 'POST'])
-    def get_appointments():
+    @requires_auth(['get-pets', 'post-pets'])
+    def get_appointments(auth_token):
 
         if request.method == 'GET':
             appointments = Appointment.query.all()
@@ -199,7 +218,8 @@ def create_app(test_config=None):
             }), 204
 
     @app.route('/appointments/<appointment_id>', methods=['GET', 'PUT', 'DELETE'])
-    def handle_appointment(appointment_id):
+    @requires_auth(['get-pets', 'put-pets', 'delete-pets'])
+    def handle_appointment(auth_token, appointment_id):
         if request.method == 'GET':
             appointment = Appointment.query.filter_by(id=appointment_id).first()
             if appointment is None:
@@ -232,6 +252,12 @@ def create_app(test_config=None):
             }), 200
 
         if request.method == 'DELETE':
+            '''
+               adding this to handle one edge case
+            '''
+            if 'delete-owners' not in auth_token['permissions']:
+                abort(403, {'message': "Missing delete permission"})
+
             appointment = Appointment.query.filter_by(id=appointment_id).first()
 
             if appointment is None:
