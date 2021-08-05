@@ -16,7 +16,7 @@ Owner
 
 
 class Owner(db.Model):
-    __tablename__ = 'owner'
+    __tablename__ = 'owners'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
@@ -50,7 +50,7 @@ Pet
 
 
 class Pet(db.Model):
-    __tablename__ = 'pet'
+    __tablename__ = 'pets'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
@@ -86,7 +86,7 @@ class Pet(db.Model):
 
 
 class Appointment(db.Model):
-    __tablename__ = 'appointment'
+    __tablename__ = 'appointments'
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey('owners.id'), nullable=False)
