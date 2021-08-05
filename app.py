@@ -5,7 +5,6 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from auth import requires_auth
 
-
 def create_app(test_config=None):
     app = Flask(__name__)
     db = setup_db(app)
@@ -289,5 +288,7 @@ def create_app(test_config=None):
     return app
 
 
+app = create_app()
+
 if __name__ == '__main__':
-    create_app().run()
+    app.run()
