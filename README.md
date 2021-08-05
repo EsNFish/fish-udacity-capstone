@@ -7,6 +7,7 @@ The purpose of this API is to act as a basic backend for managing owners, pets a
     <li>run pip install -r requirements.txt</li>
     <li>make sure you have a database on your local machine that has a database titled pet_checkin (nothing needs to be in it to start)</li>
     <li>also make sure that your database is setup with a user test with a password test</li>
+    <li>Execute 'source setup.sh' to set up environment variables</li>
     <li>run python -m app to start the api</li>
 </ul>
 
@@ -59,6 +60,8 @@ All endpoints need authorization, this can be done by passing in JWT tokens into
 There are two main roles, vet-admins who can perform all requests and vet-techs who can do everything but delete requests
 
 <h3>Unit tests</h3>
-Make sure the database you are using has a database titles pet_checkin_test
+Make sure the database you are using has a database titled pet_checkin_test
+
+Make sure to have run `source setup.sh` to load the environment variables
 
 With that you just need to execute `python -m test_owner` to run a test, no other set up needed

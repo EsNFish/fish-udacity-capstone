@@ -1,11 +1,9 @@
 from shared_db import db
-
-default_name = "pet_checkin"
-default_path = "postgresql://test:test@{}/{}".format('localhost:5432', default_name)
+import os
 
 
-def setup_db(app, database_path=default_path):
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
+def setup_db(app, database_uri=os.environ['DATABASE_URL']):
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_uri
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)
