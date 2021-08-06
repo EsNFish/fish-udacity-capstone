@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, abort, request
-
+from sqlalchemy import exc
 from models import setup_db, Owner, Pet, Appointment
 from flask_migrate import Migrate
 from flask_cors import CORS
@@ -224,7 +224,11 @@ def create_app(test_config=None):
             new_appointment = Appointment(appointment_data['date'], appointment_data['time'],
                                           appointment_data['pet_id'], appointment_data['owner_id'])
 
-            new_appointment.insert()
+            try:
+                new_appointment.insert()
+            except exc.IntegrityError:
+                abort(404, {'message': 'Can not create, either pet or owner does not exist'})
+
 
             return jsonify({
                 'success': True
