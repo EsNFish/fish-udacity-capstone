@@ -77,7 +77,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Remy\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"French Bulldog\"\r\n}",
+							"raw": "{\r\n    \"name\": \"whaa\",\r\n    \"species\": \"cat\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -347,7 +347,7 @@
 				"bearer": [
 					{
 						"key": "token",
-						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlvM19qSTVheFBZSWRwUVBBYzFWYyJ9.eyJpc3MiOiJodHRwczovL3BldC1jaGVja2luLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MTBhZjQyYjI0NTRmMjAwNmEyNTY1OTMiLCJhdWQiOiJwZXQtY2hlY2tpbiIsImlhdCI6MTYyODIxMjM1MiwiZXhwIjoxNjI4Mjk4NzUyLCJhenAiOiJoNFI4Z2w4WXJRdzgwcHlGMWt4Y1NqN25mVGd1YWFpZiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlLWFwcG9pbnRtZW50cyIsImRlbGV0ZS1vd25lcnMiLCJkZWxldGUtcGV0cyIsImdldC1hcHBvaW50bWVudHMiLCJnZXQtb3duZXJzIiwiZ2V0LXBldHMiLCJwb3N0LWFwcG9pbnRtZW50cyIsInBvc3Qtb3duZXJzIiwicG9zdC1wZXRzIiwicHV0LWFwcG9pbnRtZW50cyIsInB1dC1vd25lcnMiLCJwdXQtcGV0cyJdfQ.LtxMwp0cypbTQarS51eL7VNV9qlb0PWCqmnK2uw-j29XKnh5VKcXQOS0OkcKMuoaaeiIcnsmMkd40mN00ZFLbxgkJL14aga9NeiS2Ifq3NUmuGVtwzE_LDefv5Dd-iNaU10CWcgBwRP_9EIXcFzi2NlJ9_3QW2DCTI4TMfUTdyv0TimE6Erp_gJW0Gk2oHO23caxxrfYy_vBeMPnde8LM0zcij8rhBRU14aBEEsAXmIq7owJjtyTbWL1jYt2W1h25SZRzePub8bCyCEob_a095D7FTKK9iMsDV5BXshMs1TrsNjhouyCtQbwiyTPBTTAR5DIPPAxXwb3hFvXhw8gdg",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlvM19qSTVheFBZSWRwUVBBYzFWYyJ9.eyJpc3MiOiJodHRwczovL3BldC1jaGVja2luLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MTBhZjQyYjI0NTRmMjAwNmEyNTY1OTMiLCJhdWQiOiJwZXQtY2hlY2tpbiIsImlhdCI6MTYyODIyMDEyOSwiZXhwIjoxNjI4MzA2NTI5LCJhenAiOiJoNFI4Z2w4WXJRdzgwcHlGMWt4Y1NqN25mVGd1YWFpZiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlLWFwcG9pbnRtZW50cyIsImRlbGV0ZS1vd25lcnMiLCJkZWxldGUtcGV0cyIsImdldC1hcHBvaW50bWVudHMiLCJnZXQtb3duZXJzIiwiZ2V0LXBldHMiLCJwb3N0LWFwcG9pbnRtZW50cyIsInBvc3Qtb3duZXJzIiwicG9zdC1wZXRzIiwicHV0LWFwcG9pbnRtZW50cyIsInB1dC1vd25lcnMiLCJwdXQtcGV0cyJdfQ.qVZqnlhY8OP2zb7-AwUkPiGT16gz2N5uUo5Mhk1MKcQ6QtFRLtoRKFsXsxULOrEocCMUCyWdxYuXu0TYc5GJc20JraeFTI_pJK0wLTQOYrDiwWKDOhdZVH7WKcgScy4AIfUnndxvZU-9yGxGulHFdCsOEKqxd3a1_-n5MvhtfI6LtUPQ2iuiR45HOQFwbg2DjUle3fLGf-J27xt9zN7u5LCqBSsYlZh9VmI4MxXCehTl2Hh8gwMkmG2nA54_AOqrqgDho82SDAzA6U3UmXdJda2cADUn9m21KjRAmdzWQgQVo1kewHF9hBj7zgpu-j3d7ZJgokhN9B_ZSQWnPlFPQg",
 						"type": "string"
 					}
 				]
@@ -379,7 +379,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlvM19qSTVheFBZSWRwUVBBYzFWYyJ9.eyJpc3MiOiJodHRwczovL3BldC1jaGVja2luLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MTA4ODg4NTM1ODJiYzAwNjk0N2IyZWEiLCJhdWQiOiJwZXQtY2hlY2tpbiIsImlhdCI6MTYyODIxMjI3NCwiZXhwIjoxNjI4Mjk4Njc0LCJhenAiOiJoNFI4Z2w4WXJRdzgwcHlGMWt4Y1NqN25mVGd1YWFpZiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0LWFwcG9pbnRtZW50cyIsImdldC1vd25lcnMiLCJnZXQtcGV0cyIsInBvc3QtYXBwb2ludG1lbnRzIiwicG9zdC1vd25lcnMiLCJwb3N0LXBldHMiLCJwdXQtYXBwb2ludG1lbnRzIiwicHV0LW93bmVycyIsInB1dC1wZXRzIl19.bU_n054ao1AUy5ZlPfro2L-DlstXzfPzVCbMc7o1lP_pKl3S2QaD66uMIZ1udPiWkgCZLDVJ4_4z1AVYa8NTzfExty46y4b7pY17VuHvNTvGiSK2q5ZtGFsalBv4A9dG3qyGb2fKc1YjgWnAPfaVW7O6-eD3rwf92kZsAYcheh0BKV7jaYUbpf9cJdVtmxRRo5OHTdAIubXRImvH2fm0fywyFcHbHSvQnLmwk2ECYUy4XC_I44XMSIw_0PRdb-6uvhf6TPOb5K41lp82Sw53eEFIDqBVD8YthWnBH3As4wnHHk-TJd3PGN7tbUXU7eL_iEeejf-OIU3kdblD18uclw",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlvM19qSTVheFBZSWRwUVBBYzFWYyJ9.eyJpc3MiOiJodHRwczovL3BldC1jaGVja2luLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MTBhZjQyYjI0NTRmMjAwNmEyNTY1OTMiLCJhdWQiOiJwZXQtY2hlY2tpbiIsImlhdCI6MTYyODIyMDEyOSwiZXhwIjoxNjI4MzA2NTI5LCJhenAiOiJoNFI4Z2w4WXJRdzgwcHlGMWt4Y1NqN25mVGd1YWFpZiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlLWFwcG9pbnRtZW50cyIsImRlbGV0ZS1vd25lcnMiLCJkZWxldGUtcGV0cyIsImdldC1hcHBvaW50bWVudHMiLCJnZXQtb3duZXJzIiwiZ2V0LXBldHMiLCJwb3N0LWFwcG9pbnRtZW50cyIsInBvc3Qtb3duZXJzIiwicG9zdC1wZXRzIiwicHV0LWFwcG9pbnRtZW50cyIsInB1dC1vd25lcnMiLCJwdXQtcGV0cyJdfQ.qVZqnlhY8OP2zb7-AwUkPiGT16gz2N5uUo5Mhk1MKcQ6QtFRLtoRKFsXsxULOrEocCMUCyWdxYuXu0TYc5GJc20JraeFTI_pJK0wLTQOYrDiwWKDOhdZVH7WKcgScy4AIfUnndxvZU-9yGxGulHFdCsOEKqxd3a1_-n5MvhtfI6LtUPQ2iuiR45HOQFwbg2DjUle3fLGf-J27xt9zN7u5LCqBSsYlZh9VmI4MxXCehTl2Hh8gwMkmG2nA54_AOqrqgDho82SDAzA6U3UmXdJda2cADUn9m21KjRAmdzWQgQVo1kewHF9hBj7zgpu-j3d7ZJgokhN9B_ZSQWnPlFPQg",
 				"type": "string"
 			}
 		]
