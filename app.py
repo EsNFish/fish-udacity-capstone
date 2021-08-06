@@ -123,11 +123,16 @@ def create_app(test_config=None):
         if request.method == 'POST':
             pet_data = request.json
 
+            # adding this since breed is optional
+            breed = ''
+
             if 'name' not in pet_data:
                 abort(422, {'message': 'Pet must have a name'})
             if 'species' not in pet_data:
                 abort(422, {'message': 'Pet must have a species'})
-            new_pet = Pet(pet_data['name'], pet_data['species'], pet_data['breed'])
+            if 'breed' in pet_data:
+                breed = pet_data['breed']
+            new_pet = Pet(pet_data['name'], pet_data['species'], breed)
             new_pet.insert()
             return jsonify({
                 'success': True

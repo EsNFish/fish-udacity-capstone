@@ -1,0 +1,407 @@
+{
+	"info": {
+		"_postman_id": "cefabdaf-f1ed-42ef-b67f-33515f524735",
+		"name": "pet_checkin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pets",
+			"item": [
+				{
+					"name": "get pets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update pet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Fifi\",\r\n    \"species\": \"Dog\",\r\n    \"breed\": \"Pug\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pets/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get pet",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pets/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create pet",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Remy\",\r\n    \"species\": \"dog\",\r\n    \"breed\": \"French Bulldog\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/pets",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "owners",
+			"item": [
+				{
+					"name": "get owners",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/owners",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"owners"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update owner",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bob\",\r\n    \"phone\": \"222-222-2232\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/owners/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"owners",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get owner",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/owners/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"owners",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create owner",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Bob Ross\",\r\n    \"phone\": \"111-222-3333\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/owners",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"owners"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "appointments",
+			"item": [
+				{
+					"name": "get appointments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/appointments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update appointment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"time\": \"11:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/appointments/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"appointments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get appointment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/appointments/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"appointments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create appointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"time\": \"10:00\",\r\n    \"date\": \"1-1-2022\",\r\n    \"pet_id\": 2,\r\n    \"owner_id\": 1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/appointments",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"appointments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "deletes",
+			"item": [
+				{
+					"name": "delete appointment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/appointments/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"appointments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete owner",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/owners/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"owners",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete pet",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/pets/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"pets",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlvM19qSTVheFBZSWRwUVBBYzFWYyJ9.eyJpc3MiOiJodHRwczovL3BldC1jaGVja2luLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MTBhZjQyYjI0NTRmMjAwNmEyNTY1OTMiLCJhdWQiOiJwZXQtY2hlY2tpbiIsImlhdCI6MTYyODIxMjM1MiwiZXhwIjoxNjI4Mjk4NzUyLCJhenAiOiJoNFI4Z2w4WXJRdzgwcHlGMWt4Y1NqN25mVGd1YWFpZiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZGVsZXRlLWFwcG9pbnRtZW50cyIsImRlbGV0ZS1vd25lcnMiLCJkZWxldGUtcGV0cyIsImdldC1hcHBvaW50bWVudHMiLCJnZXQtb3duZXJzIiwiZ2V0LXBldHMiLCJwb3N0LWFwcG9pbnRtZW50cyIsInBvc3Qtb3duZXJzIiwicG9zdC1wZXRzIiwicHV0LWFwcG9pbnRtZW50cyIsInB1dC1vd25lcnMiLCJwdXQtcGV0cyJdfQ.LtxMwp0cypbTQarS51eL7VNV9qlb0PWCqmnK2uw-j29XKnh5VKcXQOS0OkcKMuoaaeiIcnsmMkd40mN00ZFLbxgkJL14aga9NeiS2Ifq3NUmuGVtwzE_LDefv5Dd-iNaU10CWcgBwRP_9EIXcFzi2NlJ9_3QW2DCTI4TMfUTdyv0TimE6Erp_gJW0Gk2oHO23caxxrfYy_vBeMPnde8LM0zcij8rhBRU14aBEEsAXmIq7owJjtyTbWL1jYt2W1h25SZRzePub8bCyCEob_a095D7FTKK9iMsDV5BXshMs1TrsNjhouyCtQbwiyTPBTTAR5DIPPAxXwb3hFvXhw8gdg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6ImlvM19qSTVheFBZSWRwUVBBYzFWYyJ9.eyJpc3MiOiJodHRwczovL3BldC1jaGVja2luLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2MTA4ODg4NTM1ODJiYzAwNjk0N2IyZWEiLCJhdWQiOiJwZXQtY2hlY2tpbiIsImlhdCI6MTYyODIxMjI3NCwiZXhwIjoxNjI4Mjk4Njc0LCJhenAiOiJoNFI4Z2w4WXJRdzgwcHlGMWt4Y1NqN25mVGd1YWFpZiIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiZ2V0LWFwcG9pbnRtZW50cyIsImdldC1vd25lcnMiLCJnZXQtcGV0cyIsInBvc3QtYXBwb2ludG1lbnRzIiwicG9zdC1vd25lcnMiLCJwb3N0LXBldHMiLCJwdXQtYXBwb2ludG1lbnRzIiwicHV0LW93bmVycyIsInB1dC1wZXRzIl19.bU_n054ao1AUy5ZlPfro2L-DlstXzfPzVCbMc7o1lP_pKl3S2QaD66uMIZ1udPiWkgCZLDVJ4_4z1AVYa8NTzfExty46y4b7pY17VuHvNTvGiSK2q5ZtGFsalBv4A9dG3qyGb2fKc1YjgWnAPfaVW7O6-eD3rwf92kZsAYcheh0BKV7jaYUbpf9cJdVtmxRRo5OHTdAIubXRImvH2fm0fywyFcHbHSvQnLmwk2ECYUy4XC_I44XMSIw_0PRdb-6uvhf6TPOb5K41lp82Sw53eEFIDqBVD8YthWnBH3As4wnHHk-TJd3PGN7tbUXU7eL_iEeejf-OIU3kdblD18uclw",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

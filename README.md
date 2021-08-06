@@ -2,8 +2,12 @@
 <h2>Description</h2>
 The purpose of this API is to act as a basic backend for managing owners, pets and appointments for a vet. 
 <h2>Heroku</h2>
-This app is hosted in heroku, The base URL to hit it is https://pet-checkin.herokuapp.com/ . A Postman current 
-authentication will be provided in the project.
+This app is hosted in heroku, The base URL to hit it is: 
+
+https://pet-checkin.herokuapp.com/
+
+A Postman suite (pet_checkin.postman_collection.json) with current authentication is provided in the project. The only additional set up needed is to create an environment that has a
+value of base_url with the url to the heroku app or to your local run of it
 <h2>To run API locally</h2>
 <ul> 
     <li>set up virtual environment if you wish</li>
