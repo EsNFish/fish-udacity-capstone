@@ -94,7 +94,7 @@ def create_app(test_config=None):
                 abort(404, {'message': 'Can not delete, owner does not exist'})
 
             # delete any appointments first
-            appointments = Appointment.query.filter_by(owner_di=owner.id)
+            appointments = Appointment.query.filter_by(owner_id=owner.id)
             if appointments is not None:
                 for appointment in appointments:
                     appointment.delete()
