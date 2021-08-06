@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 from auth import requires_auth
 
+
 def create_app(test_config=None):
     app = Flask(__name__)
     db = setup_db(app)
@@ -92,6 +93,12 @@ def create_app(test_config=None):
             if owner is None:
                 abort(404, {'message': 'Can not delete, owner does not exist'})
 
+            # delete any appointments first
+            appointments = Appointment.query.filter_by(owner_di=owner.id)
+            if appointments is not None:
+                for appointment in appointments:
+                    appointment.delete()
+
             owner.delete()
 
             return jsonify({
@@ -175,6 +182,12 @@ def create_app(test_config=None):
             if pet is None:
                 abort(404, {'message': 'Can not delete, pet does not exist'})
 
+            # delete any appointments first
+            appointments = Appointment.query.filter_by(pet_id=pet.id)
+            if appointments is not None:
+                for appointment in appointments:
+                    appointment.delete()
+
             pet.delete()
 
             return jsonify({
@@ -208,7 +221,8 @@ def create_app(test_config=None):
             if 'owner_id' not in appointment_data:
                 abort(422, {'message': 'Appointment must have an owner'})
 
-            new_appointment = Appointment(appointment_data['date'], appointment_data['time'], appointment_data['pet_id'], appointment_data['owner_id'])
+            new_appointment = Appointment(appointment_data['date'], appointment_data['time'],
+                                          appointment_data['pet_id'], appointment_data['owner_id'])
 
             new_appointment.insert()
 
@@ -267,7 +281,6 @@ def create_app(test_config=None):
             return jsonify({
                 'success': True,
             }), 200
-
 
     @app.errorhandler(404)
     def unprocessable_entity(error):
