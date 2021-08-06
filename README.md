@@ -1,12 +1,16 @@
 <H1>Pet Check In API</H1>
 <h2>Description</h2>
 The purpose of this API is to act as a basic backend for managing owners, pets and appointments for a vet. 
+<h2>Heroku</h2>
+This app is hosted in heroku, The base URL to hit it is https://pet-checkin.herokuapp.com/ . A Postman current 
+authentication will be provided in the project.
 <h2>To run API locally</h2>
 <ul> 
     <li>set up virtual environment if you wish</li>
     <li>run pip install -r requirements.txt</li>
-    <li>make sure you have a database on your local machine that has a database titled pet_checkin (nothing needs to be in it to start)</li>
-    <li>also make sure that your database is setup with a user test with a password test</li>
+    <li>make sure you have a database on your local machine that has a database titled pet_checkin and has a user 
+    named test with a password test</li>
+    <li>If you want to alter the Database url, it can be found in setup,sh</li>
     <li>Execute 'source setup.sh' to set up environment variables</li>
     <li>run python -m app to start the api</li>
 </ul>

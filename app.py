@@ -182,7 +182,7 @@ def create_app(test_config=None):
             }), 200
 
     @app.route('/appointments', methods=['GET', 'POST'])
-    @requires_auth(['get-pets', 'post-pets'])
+    @requires_auth(['get-appointments', 'post-appointments'])
     def get_appointments(auth_token):
 
         if request.method == 'GET':
@@ -217,7 +217,7 @@ def create_app(test_config=None):
             }), 204
 
     @app.route('/appointments/<appointment_id>', methods=['GET', 'PUT', 'DELETE'])
-    @requires_auth(['get-pets', 'put-pets', 'delete-pets'])
+    @requires_auth(['get-appointments', 'put-appointments', 'delete-appointments'])
     def handle_appointment(auth_token, appointment_id):
         if request.method == 'GET':
             appointment = Appointment.query.filter_by(id=appointment_id).first()
@@ -254,7 +254,7 @@ def create_app(test_config=None):
             '''
                adding this to handle one edge case
             '''
-            if 'delete-owners' not in auth_token['permissions']:
+            if 'delete-appointments' not in auth_token['permissions']:
                 abort(403, {'message': "Missing delete permission"})
 
             appointment = Appointment.query.filter_by(id=appointment_id).first()
