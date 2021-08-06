@@ -1,13 +1,14 @@
 import json
+import os
 from functools import wraps
 from urllib.request import urlopen
 
 from flask import request
 from jose import jwt, exceptions
 
-AUTH0_DOMAIN = 'pet-checkin.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'pet-checkin'
+AUTH0_DOMAIN = os.environ['AUTH0_DOMAIN']
+ALGORITHMS = os.environ['ALGORITHMS']
+API_AUDIENCE = os.environ['API_AUDIENCE']
 
 
 # AuthError Exception

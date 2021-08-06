@@ -7,7 +7,7 @@ This app is hosted in heroku, The base URL to hit it is:
 https://pet-checkin.herokuapp.com/
 
 A Postman suite (pet_checkin.postman_collection.json) with current authentication is provided in the project. The only additional set up needed is to create an environment that has a
-value of base_url with the url to the heroku app or to your local run of it
+value of base_url with the url to the heroku app or to your local server
 <h2>To run API locally</h2>
 <ul> 
     <li>set up virtual environment if you wish</li>
@@ -36,8 +36,8 @@ value of base_url with the url to the heroku app or to your local run of it
 <h3>Appointment</h3>
 <ul>
     <li>id (key)</li>
-    <li>pet_id (required)</li>
-    <li>owner_id (required)</li>
+    <li>pet_id (required, foreign from pet table)</li>
+    <li>owner_id (required, foreign from owner table)</li>
     <li>time (required)</li>
     <li>date (required)</li>
 </ul>
@@ -47,13 +47,13 @@ All of the models have GET, POST, PUT and DELETE functionality
 <h3>Endpoints</h3>
 For each model, there are two endpoints
 <ol>
-    <li>/{model name (plural)}</li>
+    <li>/{model name (plural)} ex: /pets</li>
     which supports:    
     <ul>
         <li>GET: gets all of the items of the specified model</li>
         <li>POST: adds a new item to the specified model</li>
     </ul>
-    <li>/{model name (plural)}/{id-number}</li>
+    <li>/{model name (plural)}/{id-number} ex: /pets/1</li>
     which supports:    
     <ul>
         <li>GET: gets the item with the id passed in from the specified model</li>
@@ -68,7 +68,10 @@ All endpoints need authorization, this can be done by passing in JWT tokens into
 There are two main roles, vet-admins who can perform all requests and vet-techs who can do everything but delete requests
 
 <h3>Unit tests</h3>
-Make sure the database you are using has a database titled pet_checkin_test
+Make sure the database you are using has a database titled pet_checkin_test. The current set up requires the database to have
+a user of test that has a password of test
+
+The path to the test database can be modified in the setup.sh file
 
 Make sure to have run `source setup.sh` to load the environment variables
 
